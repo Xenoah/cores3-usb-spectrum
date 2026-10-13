@@ -4,7 +4,7 @@ M5Stack CoreS3を、USBオーディオ入力のスペクトラムアナライザ
 
 ![実機の画面：USBで送ったマルチトーン信号](verification/spectrum-live.png)
 
-[v1.0.0をダウンロード](https://github.com/Xenoah/cores3-usb-spectrum/releases/tag/v1.0.0) · [実機テスト結果](verification/summary.json)
+[v1.1.0をダウンロード](https://github.com/Xenoah/cores3-usb-spectrum/releases/tag/v1.1.0) · [性能測定・実機テスト結果](verification/performance.json)
 
 ## 普段の使い方
 
@@ -38,7 +38,7 @@ M5Stack CoreS3を、USBオーディオ入力のスペクトラムアナライザ
 
 初回の書き込み作業にはPythonとesptoolが必要です。通常使用時には不要です。以下はWindowsでの例です。
 
-1. [Releases](https://github.com/Xenoah/cores3-usb-spectrum/releases)から `cores3-usb-spectrum-v1.0.0.zip` をダウンロードして展開します。書き込み用BIN、手順、ライセンスを同梱しています。
+1. [Releases](https://github.com/Xenoah/cores3-usb-spectrum/releases)から `cores3-usb-spectrum-v1.1.0.zip` をダウンロードして展開します。書き込み用BIN、手順、ライセンスを同梱しています。
 2. esptoolを用意します。
 
    ```powershell
@@ -57,12 +57,12 @@ M5Stack CoreS3を、USBオーディオ入力のスペクトラムアナライザ
 5. 展開したフォルダーで次を実行します。BINはブートローダー・パーティション表・アプリを結合済みなので、書き込み先は **0x0** です。
 
    ```powershell
-   python -m esptool --chip esp32s3 --port COM4 --after watchdog-reset write-flash 0x0 cores3-usb-spectrum-v1.0.0.bin
+   python -m esptool --chip esp32s3 --port COM4 --after watchdog-reset write-flash 0x0 cores3-usb-spectrum-v1.1.0.bin
    ```
 
 6. 本体が起動したら、Windowsの音声出力先に **CoreS3 USB Spectrum** を選びます。
 
-`SHA256SUMS.txt` と `Get-FileHash .\cores3-usb-spectrum-v1.0.0.bin -Algorithm SHA256` の値でファイルを検証できます。通常動作中とダウンロードモードでCOM番号が変わる場合があります。書き込み後にダウンロードモードへ留まる場合は、RESETを短く押してください。
+`SHA256SUMS.txt` と `Get-FileHash .\cores3-usb-spectrum-v1.1.0.bin -Algorithm SHA256` の値でファイルを検証できます。通常動作中とダウンロードモードでCOM番号が変わる場合があります。書き込み後にダウンロードモードへ留まる場合は、RESETを短く押してください。
 
 元に戻すには、再びダウンロードモードにして、自分のバックアップを0x0へ書き戻します。
 
@@ -118,9 +118,9 @@ python tools/test_display.py
 
 `test_device.py` はWindows標準のwaveOut APIで対象装置へテスト音を送ります。システムの既定出力先は変更しません。診断用COMには `s`（状態）、`p`（PPM画像）、`m`（ミュート切り替え）、`h`（保持切り替え）、`w`（波形切り替え）、`v`（LCDの読み戻し検証）を送れます。
 
-### 画面更新の最適化（開発版）
+### v1.1.0の画面更新の最適化
 
-接続したCoreS3での実測値です。動くステレオ信号を8秒間送ったときの平均更新回数を比較しています。
+接続したCoreS3での実測値です。動くステレオ信号を8秒間送ったときの平均更新回数を比較しています。測定には `1.1.0-dev` を使用し、正式版 `1.1.0` は診断用バージョン文字列だけを変更して再ビルドしています。正式版BINの再書き込みによる実機試験は行っていません。
 
 | 表示 | v1.0.0 | 最適化版 1.1.0-dev |
 | --- | ---: | ---: |
@@ -143,7 +143,7 @@ python tools/test_display.py
 
 `benchmark_device.py` は音量と周波数が動くステレオ信号を送り、8秒間の更新回数と音声欠落を測定します。本体スピーカーを一時ミュートし、終了時に元の状態へ戻します。`verify-display` は描画用バッファとLCD RAMを比較します（RGB565/666変換の誤差を許容）。
 
-## 実機確認（2026-10-13）
+## v1.0.0の実機確認（2026-10-13）
 
 - Microsoft標準 `usbaudio2.inf` / `usbser.inf` で認識。
 - USBから送った440 Hz、1 kHz、4 kHz、逆位相の1 kHz、無音の試験に合格。

@@ -1,6 +1,6 @@
 """Package an already merged firmware image with instructions and notices.
 
-Usage: python tools/package_release.py dist/cores3-usb-spectrum-v1.0.0.bin
+Usage: python tools/package_release.py dist/cores3-usb-spectrum-v1.1.0.bin
 Outputs a sibling ZIP and SHA256SUMS.txt. Does not flash a device.
 """
 import argparse
