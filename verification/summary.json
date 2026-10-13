@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-13",
+  "device": "M5Stack CoreS3 (ESP32-S3)",
+  "usb_audio_driver": "Microsoft usbaudio2.inf",
+  "runtime_pc_software_required": false,
+  "sample_rate_hz": 48000,
+  "channels": 2,
+  "pcm_bits": 16,
+  "tests": [
+    {
+      "tone_hz": 440,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        439.92,
+        439.92,
+        439.92
+      ]
+    },
+    {
+      "tone_hz": 1000,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        1000.18,
+        1000.18,
+        1000.18
+      ]
+    },
+    {
+      "tone_hz": 4000,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        4000.18,
+        4000.18,
+        4000.18
+      ]
+    },
+    {
+      "tone_hz": 1000,
+      "opposite_phase": true,
+      "passed": true,
+      "measured_hz": [
+        1000.18,
+        1000.18,
+        1000.18
+      ]
+    },
+    {
+      "tone_hz": 0,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "speaker_queue_dropped_bytes": 0,
+  "notes": [
+    "Spectrum display and audio reception checked via device telemetry and framebuffer.",
+    "Onboard speaker is fed PCM; acoustic output and physical touch were not independently measured.",
+    "USB re-enumeration after watchdog hardware reset confirmed. Physical cable replug was not independently tested."
+  ]
+}
