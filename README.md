@@ -111,9 +111,37 @@ python -m pip install pyserial Pillow
 python tools/device.py status
 python tools/device.py screenshot --output screen.png
 python tools/test_device.py
+python tools/benchmark_device.py --output verification/performance.json
+python tools/device.py verify-display
+python tools/test_display.py
 ```
 
-`test_device.py` はWindows標準のwaveOut APIで対象装置へテスト音を送ります。システムの既定出力先は変更しません。診断用COMには `s`（状態）、`p`（PPM画像）、`m`（ミュート切り替え）、`h`（保持切り替え）、`w`（波形切り替え）を送れます。
+`test_device.py` はWindows標準のwaveOut APIで対象装置へテスト音を送ります。システムの既定出力先は変更しません。診断用COMには `s`（状態）、`p`（PPM画像）、`m`（ミュート切り替え）、`h`（保持切り替え）、`w`（波形切り替え）、`v`（LCDの読み戻し検証）を送れます。
+
+### 画面更新の最適化（開発版）
+
+接続したCoreS3での実測値です。動くステレオ信号を8秒間送ったときの平均更新回数を比較しています。
+
+| 表示 | v1.0.0 | 最適化版 1.1.0-dev |
+| --- | ---: | ---: |
+| スペクトラム | 15.34回/秒 | **134.58回/秒（8.77倍）** |
+| 波形 | 未測定 | **112.14回/秒** |
+
+両モードで音声キューの欠落は0バイトでした。LCD RAMの読み戻しは計6回・各76,800画素で不一致0（色変換の最大差3/255）。周波数・振幅校正・逆位相・無音・HOLD解除後の待機復帰も確認しています。[測定条件と結果](verification/performance.json)
+
+![最適化版の実機画面](verification/optimized-bars.png)
+
+固定の33ms待ちを廃止し、新しい音声データに追従して解析・描画します。待機中やHOLD中は不要なFFT・画面転送を省きます。
+
+- ESP-IDFを速度優先の `-O2` でビルドし、ESP-DSP 1.8.2のESP32-S3向けRadix-4 FFTを使用。
+- FFTのサイズは4096点、音声入力は48 kHz / 16 bit / ステレオのままです。
+- LCDへは変化した棒・ピーク・数値・メーターだけを転送。波形は前回と今回の振幅が占める範囲に絞ります。内部RAMの2つのDMAバッファでPSRAMからのコピーとSPI転送を重ねます。
+- ピーク保持と減衰は経過時間で計算し、FPSの変動による速さの変化を防ぎます。
+- CPUは240 MHz、LCDのSPIはM5GFX標準の40 MHzで動作します。
+
+画面のFPSは「LCDへの転送が完了した表示更新」の秒間回数です。液晶パネル自体の走査周波数を測定した値ではありません。静止画面のFPSは低下します。`status` には解析時間・描画時間・LCD転送時間・転送バイト数も表示します。
+
+`benchmark_device.py` は音量と周波数が動くステレオ信号を送り、8秒間の更新回数と音声欠落を測定します。本体スピーカーを一時ミュートし、終了時に元の状態へ戻します。`verify-display` は描画用バッファとLCD RAMを比較します（RGB565/666変換の誤差を許容）。
 
 ## 実機確認（2026-10-13）
 

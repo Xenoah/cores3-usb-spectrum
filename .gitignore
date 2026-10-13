@@ -16,3 +16,6 @@ dist/
 !/verification/summary.json
 !/verification/spectrum-live.png
 !/verification/spectrum-idle.png
+!/verification/performance.json
+!/verification/optimized-bars.png
+!/verification/optimized-waveform.png

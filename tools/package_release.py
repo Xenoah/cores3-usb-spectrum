@@ -27,6 +27,10 @@ def main():
     files = ['README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.txt',
              'verification/summary.json', 'verification/spectrum-live.png',
              'verification/spectrum-idle.png']
+    for name in ['verification/performance.json','verification/optimized-bars.png',
+                 'verification/optimized-waveform.png']:
+        if (root/name).is_file():
+            files.append(name)
     for name in files:
         if not (root/name).is_file():
             parser.error(f'Missing package file: {name}')
@@ -37,6 +41,17 @@ def main():
         for name in files:
             bundle.write(root/name, name)
         bundle.writestr('SHA256SUMS.txt', bin_checksum)
+        bundle.writestr('FLASHING.txt',
+            f'CoreS3 USB Spectrum: {firmware.name}\n\n'
+            'Merged image: flash at offset 0x0. CoreS3, 16 MB flash, 8 MB Quad PSRAM.\n'
+            'Back up your original firmware before overwriting it.\n'
+            'Install Python and esptool 5.2.0 for flashing only.\n'
+            'Hold RESET until the green LED lights (~3 seconds), then release.\n'
+            'Replace COM4 with the download-mode port shown by Device Manager.\n\n'
+            'python -m pip install "esptool==5.2.0"\n'
+            f'python -m esptool --chip esp32s3 --port COM4 --after watchdog-reset write-flash 0x0 {firmware.name}\n\n'
+            'Select CoreS3 USB Spectrum as the Windows audio output.\n'
+            'Normal operation requires no companion app or additional driver.\n')
     with ZipFile(archive) as bundle:
         if bundle.testzip() is not None:
             raise RuntimeError('ZIP verification failed')

@@ -36,7 +36,7 @@ def screenshot(s,path):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser()
-    p.add_argument('action',choices=['status','screenshot','mute','hold','wave'])
+    p.add_argument('action',choices=['status','screenshot','mute','hold','wave','verify-display'])
     p.add_argument('--port')
     p.add_argument('--output',default='device-screen.png')
     args=p.parse_args()
@@ -44,5 +44,5 @@ if __name__=='__main__':
         if args.action=='status': print(json.dumps(status(s),indent=2))
         elif args.action=='screenshot': print(screenshot(s,pathlib.Path(args.output)))
         else:
-            s.write({'mute':b'm','hold':b'h','wave':b'w'}[args.action])
+            s.write({'mute':b'm','hold':b'h','wave':b'w','verify-display':b'v'}[args.action])
             print(s.readline().decode())

@@ -1,9 +1,15 @@
-Third-party notices for cores3-usb-spectrum v1.0.0
+Third-party notices for cores3-usb-spectrum
 
 The firmware links the libraries listed below. These retain their original
 licenses and copyright notices; this project's MIT license does not replace
 them. Dependency versions are recorded in dependencies.lock.
 This file accompanies both the source repository and firmware release.
+
+ESP-DSP 1.8.2 - https://github.com/espressif/esp-dsp
+Copyright 2018-2025 Espressif Systems (Shanghai) CO LTD.
+Radix-4 ESP32-S3 assembly contributor: 2024 f4lc0n @ Libera Chat IRC.
+Licensed under Apache-2.0; the full Apache License 2.0 appears below in the
+ESP-IDF / Espressif section and applies to this component as well.
 
 ==============================================================================
 M5Unified 0.2.17 / M5GFX 0.2.23 - https://github.com/m5stack

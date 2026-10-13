@@ -3,3 +3,4 @@ dependencies:
   m5stack/m5unified: "0.2.17"
   m5stack/m5gfx: "0.2.23"
   espressif/usb_device_uac: "1.3.2"
+  espressif/esp-dsp: "1.8.2"

@@ -14,6 +14,7 @@ static void tone(float hz,float left,float right) {
     fft.analyze(samples);
 }
 int main() {
+    check(fft.begin(),"FFT initialization");
     fft.analyze(samples); check(fft.peakHz==0 && fft.peakDb<=-119,"digital silence");
     const float binTone=96.f*48000/4096;
     tone(binTone,0.5f,0.5f);
@@ -29,5 +30,6 @@ int main() {
     }
     for(auto &s:samples) s=10000;
     fft.analyze(samples); check(fft.peakDb<=-110,"DC rejection");
+    fft.clear(); check(fft.peakHz==0 && fft.rms[0]<=-119 && fft.db[0]<=-119,"idle reset clears held analysis");
     std::puts("All spectrum DSP tests passed.");
 }

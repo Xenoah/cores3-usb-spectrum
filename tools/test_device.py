@@ -43,13 +43,18 @@ def devices():
     return result
 
 class Playback:
-    def __init__(self,index,hz,seconds=2,opposite=False,multitone=False):
+    def __init__(self,index,hz,seconds=2,opposite=False,multitone=False,motion=False):
         self.handle=C.c_void_p()
         fmt=Format(1,2,48000,48000*4,4,16,0)
         checked(winmm.waveOutOpen(C.byref(self.handle),index,C.byref(fmt),0,0,0))
         pcm=bytearray(int(48000*seconds)*4)
         for i in range(len(pcm)//4):
-            if multitone:
+            if motion:
+                t=i/48000
+                level=.15+.85*(.5+.5*math.sin(2*math.pi*2.3*t))
+                l=int(10000*level*math.sin(2*math.pi*(120*t+270*t*t)))
+                r=int(10000*level*math.sin(2*math.pi*(600*t+80*t*t)))
+            elif multitone:
                 a=sum(math.sin(2*math.pi*f*i/48000)*w for f,w in [(65,.2),(180,.15),(440,.2),(1000,.15),(3200,.15),(9600,.1)])
                 b=sum(math.sin(2*math.pi*f*i/48000)*w for f,w in [(90,.2),(260,.15),(660,.2),(1800,.15),(5200,.1)])
                 l=int(8192*a); r=int(8192*b)
@@ -74,7 +79,7 @@ if __name__=='__main__':
     out=Path(__file__).resolve().parents[1]/'verification'; out.mkdir(exist_ok=True)
     results=[]
     with connect(args.port) as s:
-        for hz,opposite in [(440,False),(1000,False),(4000,False),(1000,True),(0,False)]:
+        for hz,opposite in [(440,False),(1000,False),(4000,False),(1000,True),(1125,False),(19950,False),(0,False)]:
             play=Playback(found[0],hz,args.seconds,opposite)
             try:
                 # Allow any Windows endpoint-open notification sound to finish.
@@ -83,6 +88,16 @@ if __name__=='__main__':
                 for _ in range(3): readings.append(status(s)); time.sleep(.15)
                 result={'tone_hz':hz,'opposite_phase':opposite,'readings':readings}
                 result['passed']=all(abs(v['peak_hz']-hz)<5 for v in readings) if hz else all(v['left_dbfs']<=-110 and v['peak_hz']==0 for v in readings)
+                if hz==1125:
+                    # Exact FFT bin: sine peak is sqrt(2) times RMS. This checks
+                    # the device's optimized FFT scale, independently of PC volume.
+                    result['amplitude_calibration_passed']=all(abs(v['peak_dbfs']-v['left_dbfs']-3.0103)<.08 for v in readings)
+                    result['passed'] &= result['amplitude_calibration_passed']
+                if opposite:
+                    normal=next(r for r in results if r.get('tone_hz')==1000 and not r['opposite_phase'])
+                    reference=sum(v['peak_dbfs'] for v in normal['readings'])/len(normal['readings'])
+                    result['phase_energy_passed']=all(abs(v['peak_dbfs']-reference)<.08 for v in readings)
+                    result['passed'] &= result['phase_energy_passed']
                 results.append(result); print(json.dumps(result),flush=True)
             finally: play.close()
         play=Playback(found[0],0,8,multitone=True)

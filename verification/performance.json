@@ -1,0 +1,357 @@
+{
+  "date": "2026-10-13",
+  "firmware": "1.1.0-dev",
+  "device": "M5Stack CoreS3, 16 MB flash / 8 MB Quad PSRAM",
+  "firmware_sha256": "5126e2b576364008ef9aefc986538e70eff765027afaf2923d7015d4ee1075d7",
+  "cpu_mhz": 240,
+  "lcd_spi_mhz": 40,
+  "fft_points": 4096,
+  "audio_hz": 48000,
+  "metric": "Completed LCD update batches per second; not the physical panel scan rate",
+  "baseline_bars": {
+    "firmware": "1.0.0",
+    "workload": "moving stereo chirps",
+    "elapsed_s": 8.0183,
+    "display_updates_per_second": 15.34,
+    "received_frames": 381072,
+    "dropped_bytes": 0,
+    "start": {
+      "firmware": "1.0.0",
+      "board": 27,
+      "usb": true,
+      "audio": true,
+      "rate": 48000,
+      "frames": 398832,
+      "packets": 8273,
+      "age_ms": 0,
+      "peak_hz": 675.94,
+      "peak_dbfs": -15.9,
+      "left_dbfs": -15.29,
+      "right_dbfs": -15.26,
+      "dropped_bytes": 0,
+      "draws": 33172,
+      "hold": false,
+      "local_mute": true,
+      "host_mute": false,
+      "host_volume": 90,
+      "heap": 8386736
+    },
+    "end": {
+      "firmware": "1.0.0",
+      "board": 27,
+      "usb": true,
+      "audio": true,
+      "rate": 48000,
+      "frames": 779904,
+      "packets": 16204,
+      "age_ms": 0,
+      "peak_hz": 1959.83,
+      "peak_dbfs": -20.84,
+      "left_dbfs": -19.95,
+      "right_dbfs": -19.95,
+      "dropped_bytes": 0,
+      "draws": 33295,
+      "hold": false,
+      "local_mute": true,
+      "host_mute": false,
+      "host_volume": 90,
+      "heap": 8386664
+    }
+  },
+  "optimized_bars": {
+    "firmware": "1.1.0-dev",
+    "workload": "moving stereo chirps",
+    "display_mode": "bars",
+    "elapsed_s": 8.0101,
+    "display_updates_per_second": 134.58,
+    "received_frames": 384480,
+    "dropped_bytes": 0,
+    "start": {
+      "firmware": "1.1.0-dev",
+      "board": 27,
+      "usb": true,
+      "audio": true,
+      "rate": 48000,
+      "frames": 689712,
+      "packets": 14357,
+      "age_ms": 0,
+      "peak_hz": 684.76,
+      "peak_dbfs": -14.57,
+      "left_dbfs": -13.61,
+      "right_dbfs": -13.63,
+      "dropped_bytes": 0,
+      "draws": 1422,
+      "hold": false,
+      "local_mute": true,
+      "host_mute": false,
+      "host_volume": 100,
+      "heap": 8306804,
+      "internal_heap": 109935,
+      "waveform": false,
+      "analyses": 1380,
+      "fps": 42.95,
+      "analysis_us": 2875,
+      "render_us": 4127,
+      "lcd_us": 2554,
+      "bytes_per_frame": 16990,
+      "max_frame_us": 48775
+    },
+    "end": {
+      "firmware": "1.1.0-dev",
+      "board": 27,
+      "usb": true,
+      "audio": true,
+      "rate": 48000,
+      "frames": 1074192,
+      "packets": 22367,
+      "age_ms": 0,
+      "peak_hz": 1965.73,
+      "peak_dbfs": -25.67,
+      "left_dbfs": -24.36,
+      "right_dbfs": -24.36,
+      "dropped_bytes": 0,
+      "draws": 2500,
+      "hold": false,
+      "local_mute": true,
+      "host_mute": false,
+      "host_volume": 100,
+      "heap": 8306804,
+      "internal_heap": 109935,
+      "waveform": false,
+      "analyses": 2458,
+      "fps": 144.25,
+      "analysis_us": 2851,
+      "render_us": 1390,
+      "lcd_us": 1270,
+      "bytes_per_frame": 6566,
+      "max_frame_us": 7016
+    }
+  },
+  "optimized_waveform": {
+    "firmware": "1.1.0-dev",
+    "workload": "moving stereo chirps",
+    "display_mode": "waveform",
+    "elapsed_s": 8.0081,
+    "display_updates_per_second": 112.14,
+    "received_frames": 384384,
+    "dropped_bytes": 0,
+    "start": {
+      "firmware": "1.1.0-dev",
+      "board": 27,
+      "usb": true,
+      "audio": true,
+      "rate": 48000,
+      "frames": 28896,
+      "packets": 598,
+      "age_ms": 0,
+      "peak_hz": 684.91,
+      "peak_dbfs": -14.62,
+      "left_dbfs": -13.6,
+      "right_dbfs": -13.61,
+      "dropped_bytes": 0,
+      "draws": 67,
+      "hold": false,
+      "local_mute": true,
+      "host_mute": false,
+      "host_volume": 100,
+      "heap": 8306804,
+      "internal_heap": 109935,
+      "waveform": true,
+      "analyses": 59,
+      "fps": 10.97,
+      "analysis_us": 2954,
+      "render_us": 5997,
+      "lcd_us": 12773,
+      "bytes_per_frame": 61981,
+      "max_frame_us": 49145
+    },
+    "end": {
+      "firmware": "1.1.0-dev",
+      "board": 27,
+      "usb": true,
+      "audio": true,
+      "rate": 48000,
+      "frames": 413280,
+      "packets": 8606,
+      "age_ms": 0,
+      "peak_hz": 1965.89,
+      "peak_dbfs": -25.76,
+      "left_dbfs": -24.48,
+      "right_dbfs": -24.48,
+      "dropped_bytes": 0,
+      "draws": 965,
+      "hold": false,
+      "local_mute": true,
+      "host_mute": false,
+      "host_volume": 100,
+      "heap": 8306804,
+      "internal_heap": 109935,
+      "waveform": true,
+      "analyses": 957,
+      "fps": 113.19,
+      "analysis_us": 2902,
+      "render_us": 1765,
+      "lcd_us": 2681,
+      "bytes_per_frame": 14060,
+      "max_frame_us": 10435
+    }
+  },
+  "bars_speedup": 8.77,
+  "lcd_and_controls": [
+    {
+      "lcd_mismatched_pixels": 0,
+      "max_channel_delta": 3,
+      "pixels": 76800,
+      "mode": "bars"
+    },
+    {
+      "lcd_mismatched_pixels": 0,
+      "max_channel_delta": 3,
+      "pixels": 76800,
+      "mode": "bars"
+    },
+    {
+      "lcd_mismatched_pixels": 0,
+      "max_channel_delta": 3,
+      "pixels": 76800,
+      "mode": "bars"
+    },
+    {
+      "lcd_mismatched_pixels": 0,
+      "max_channel_delta": 3,
+      "pixels": 76800,
+      "mode": "waveform"
+    },
+    {
+      "lcd_mismatched_pixels": 0,
+      "max_channel_delta": 3,
+      "pixels": 76800,
+      "mode": "waveform"
+    },
+    {
+      "lcd_mismatched_pixels": 0,
+      "max_channel_delta": 3,
+      "pixels": 76800,
+      "mode": "waveform"
+    },
+    {
+      "hold_and_idle_reset_passed": true,
+      "dropped_bytes": 0
+    }
+  ],
+  "tone_tests": [
+    {
+      "tone_hz": 440,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        439.92,
+        439.92,
+        439.92
+      ],
+      "peak_dbfs": [
+        -19.23,
+        -19.23,
+        -19.23
+      ]
+    },
+    {
+      "tone_hz": 1000,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        1000.18,
+        1000.18,
+        1000.18
+      ],
+      "peak_dbfs": [
+        -18.69,
+        -18.69,
+        -18.69
+      ]
+    },
+    {
+      "tone_hz": 4000,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        4000.18,
+        4000.18,
+        4000.18
+      ],
+      "peak_dbfs": [
+        -18.69,
+        -18.69,
+        -18.69
+      ]
+    },
+    {
+      "tone_hz": 1000,
+      "opposite_phase": true,
+      "passed": true,
+      "measured_hz": [
+        1000.18,
+        1000.18,
+        1000.18
+      ],
+      "peak_dbfs": [
+        -18.69,
+        -18.69,
+        -18.69
+      ],
+      "phase_energy_passed": true
+    },
+    {
+      "tone_hz": 1125,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        1125.0,
+        1125.0,
+        1125.0
+      ],
+      "peak_dbfs": [
+        -18.06,
+        -18.06,
+        -18.06
+      ],
+      "amplitude_calibration_passed": true
+    },
+    {
+      "tone_hz": 19950,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        19950.14,
+        19950.14,
+        19950.14
+      ],
+      "peak_dbfs": [
+        -18.97,
+        -18.97,
+        -18.97
+      ]
+    },
+    {
+      "tone_hz": 0,
+      "opposite_phase": false,
+      "passed": true,
+      "measured_hz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_dbfs": [
+        -120.0,
+        -120.0,
+        -120.0
+      ]
+    }
+  ],
+  "build": "PlatformIO Core 6.2.0 / Espressif32 6.12.0 / ESP-IDF 5.5.0 / ESP-DSP 1.8.2 / -O2; clean build and host DSP tests passed",
+  "limitations": [
+    "FPS depends on the signal and display mode. Static frames are intentionally not retransmitted.",
+    "LCD RAM readback validates transfer integrity, not physical panel scan timing or tearing.",
+    "Physical touch and acoustic output were not independently measured."
+  ]
+}
